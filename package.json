@@ -23,10 +23,6 @@
     "minimist": "latest"
 
   },
-  "devDependencies": {
-    "grunt-release": "latest",
-    "grunt": "latest"
-  },
   "repository": {
     "type": "git",
     "url": "git@git-repos.ustream-adm.in:jms/jms-deploy.git"
