@@ -9,15 +9,14 @@ var builder        = require(paths.libdir + '/startup/builder');
 
 var startTime = +new Date();
 
-
 var argv = require('minimist')(process.argv.slice(2));
 
-//console.dir(argv)
-
-
-
-
-
+/**
+ *
+ * @param err
+ * @param source
+ * @returns {*}
+ */
 function doneBuild (err, source) {
 	var log = require(paths.libdir + '/debug/log');
 	var doneTime = +new Date();
@@ -38,10 +37,12 @@ function doneBuild (err, source) {
 
 	log.info('jms-deploy', 'done');
 	process.exit(0);
-
-
 }
 
+/**
+ *
+ * @param err
+ */
 function donePurge (err) {
 
 	var log = require(paths.libdir + '/debug/log');
@@ -55,9 +56,11 @@ function donePurge (err) {
 	log.info('jms-deploy', 'done');
 
 	process.exit(0);
-
 }
 
+/**
+ *
+ */
 function runBuilder () {
 	var log = require(paths.libdir + '/debug/log');
 	var sources = Object.keys(codebaseConf.sources);
