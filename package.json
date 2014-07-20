@@ -1,31 +1,37 @@
 {
   "name": "jms-deploy",
   "main": "./deploy.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "JMS deployer for Ustream",
   "author": "_Nec <nec@ustream.tv>",
   "license": "MIT",
   "dependencies": {
-	"jms-config": "0.0.9",
-	"jms-ustreamlocales": "0.1.11",
-
+    "jms-config": "0.0.9",
+    "jms-ustreamlocales": "0.1.11",
     "async": "latest",
     "escodegen": "latest",
     "esprima": "latest",
     "estraverse": "latest",
     "graceful-fs": "latest",
-	"uglify-js": "latest",
-	"stream-combiner": "latest",
-	"sse4_crc32": "latest",
-	"redis": "latest",
-	"npmlog": "latest",
-	"lodash": "latest",
+    "uglify-js": "latest",
+    "stream-combiner": "latest",
+    "sse4_crc32": "latest",
+    "redis": "latest",
+    "npmlog": "latest",
+    "lodash": "latest",
     "minimist": "latest"
-
+  },
+  "devDependencies": {
+    "grunt-release": "latest",
+    "grunt": "latest"
   },
   "repository": {
     "type": "git",
     "url": "git@git-repos.ustream-adm.in:jms/jms-deploy.git"
+  },
+  "publishConfig": {
+    "registry": "http://sjc-npm-cache.ustream.tv:4873",
+    "username": "ustream"
   },
   "engines": {
     "node": ">= 0.10"
