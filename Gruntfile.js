@@ -12,13 +12,11 @@ module.exports = function(grunt) {
 				add: true, //default: true
 				commit: true, //default: true
 				push: true, //default: true
-
-				npm: true, //default: true
-				npmtag: true, //default: no tag
-
 				tag: true, //default: true
 				pushTags: true, //default: true
 
+				npm: true, //default: true
+				npmtag: true, //default: no tag
 			}
 		}
 	});
