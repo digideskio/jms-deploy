@@ -6,7 +6,7 @@
   "author": "_Nec <nec@ustream.tv>",
   "license": "MIT",
   "dependencies": {
-    "jms-config": "0.0.12",
+    "jms-config": "0.0.13",
     "jms-ustreamlocales": "0.1.11",
     "async": "latest",
     "escodegen": "latest",
