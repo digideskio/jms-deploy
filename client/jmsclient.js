@@ -56,24 +56,7 @@ window.jms.client = (function (window, document, undef) {
 					var data = window['jmscb_' + context.callBackIndex]();
 
 					try {
-
-						/*
-							debug stress test helper
-						 */
-						remapModules(context.onCompleteActionArguments[0], data.list.split('|'));
-						var d = window.define,
-							arln = context.onCompleteActionArguments[0][1].length;
-						while (arln--) {
-							d(context.onCompleteActionArguments[0][1][arln], [], function () {
-								return function () {};
-							});
-						}
-						/*
-							// debug stress test helper
-						*/
-
-						// re-insert this if you want to go live
-						//data.payload.call(window);
+						data.payload.call(window);
 					} catch (e) {
 						errorMode = true;
 						throw e;
