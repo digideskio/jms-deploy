@@ -30,8 +30,7 @@
     "url": "git@git-repos.ustream-adm.in:jms/jms-deploy.git"
   },
   "publishConfig": {
-    "registry": "http://sjc-npm-cache.ustream.tv:4873",
-    "username": "ustream"
+    "registry": "http://sjc-npm-cache.ustream.tv:4873"
   },
   "engines": {
     "node": ">= 0.10"
