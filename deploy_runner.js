@@ -17,7 +17,7 @@ var startTime = +new Date();
  * @param source
  * @returns {*}
  */
-function doneBuild (err, source) {
+function doneBuild (doneCallback, err, source) {
 	var log = require(paths.libdir + '/debug/log');
 	var doneTime = +new Date();
 
@@ -27,23 +27,32 @@ function doneBuild (err, source) {
 
 	if (err) {
 		log.error('jms-deploy', err);
-		process.exit(1);
+
+		if (doneCallback) {
+			doneCallback(1)
+		} else {
+			process.exit(1);
+		}
 		return;
 	}
 
 	if (source) {
-		return cachepurge.deleteSource(null, source, donePurge);
+		return cachepurge.deleteSource(null, source, donePurge.bind(null, doneCallback));
 	}
 
 	log.info('jms-deploy', 'done');
-	process.exit(0);
+	if (doneCallback) {
+		doneCallback(0)
+	} else {
+		process.exit(0);
+	}
 }
 
 /**
  *
  * @param err
  */
-function donePurge (err) {
+function donePurge (doneCallback, err) {
 
 	var log = require(paths.libdir + '/debug/log');
 
@@ -55,33 +64,37 @@ function donePurge (err) {
 
 	log.info('jms-deploy', 'done');
 
-	process.exit(0);
+	if (doneCallback) {
+		doneCallback(0)
+	} else {
+		process.exit(0);
+	}
 }
 
 /**
  *
  */
-function deploy_runner (sourceId) {
+function deploy_runner (sourceId, doneCallback) {
 	var log = require(paths.libdir + '/debug/log');
 	var sources = Object.keys(codebaseConf.sources);
 
 
 	if (sourceId && sources.indexOf(sourceId) > -1) {
-		builder(sourceId, doneBuild);
+		builder(sourceId, doneBuild.bind(null, doneCallback));
 		return;
 	}
 
 	var done = function done (err, source) {
 		if (!sources || err) {
 			sources = false;
-			return doneBuild(err, source);
+			return doneBuild(doneCallback, err, source);
 		}
 
 		sources.pop();
 		cachepurge.deleteSource(source, function () {});
 
 		if (sources.length === 0) {
-			doneBuild(null);
+			doneBuild(doneCallback, null);
 		}
 	};
 
