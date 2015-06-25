@@ -109,13 +109,17 @@ window.jms.client = (function (window, document, undef) {
 		 */
 
 		var url = [
-			cfg.baseURL,
-			'js/',
-			cfg.source + '/',
-			'+',
-			modulesToLoad.join(','),
-			(loadedList.length) ? '-'+loadedList.join(',') : '',
-			'.js',
+			[
+				cfg.baseURL,
+				'js',
+				cfg.source,
+				cfg.stage,
+				['+',
+					modulesToLoad.join(','),
+					(loadedList.length) ? '-'+loadedList.join(',') : '',
+					'.js'
+				].join('')
+			].join('/'),
 			params()
 		].join('');
 

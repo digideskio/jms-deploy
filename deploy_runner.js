@@ -3,22 +3,23 @@
 var config         = require('jms-config');
 var paths          = require('./lib/paths');
 
+var log            = require(paths.libdir + '/debug/log');
+
 var codebaseConf   = config.codebase;
-var cachepurge     = require(paths.libdir + '/cachepurge');
+var cache          = require(paths.libdir + '/cachepurge');
 var builder        = require(paths.libdir + '/startup/builder');
 
 var startTime = +new Date();
 
 
-
 /**
  *
- * @param err
- * @param source
+ * @param {Function} done
+ * @param {Object} err
+ * @param {String} source
  * @returns {*}
  */
-function doneBuild (doneCallback, err, source) {
-	var log = require(paths.libdir + '/debug/log');
+function doneBuild (done, err, source, stage) {
 	var doneTime = +new Date();
 
 	var elapsed = Math.round((doneTime - startTime) / 1000);
@@ -28,8 +29,8 @@ function doneBuild (doneCallback, err, source) {
 	if (err) {
 		log.error('jms-deploy', err);
 
-		if (doneCallback) {
-			doneCallback(1)
+		if (done) {
+			done(1)
 		} else {
 			process.exit(1);
 		}
@@ -37,12 +38,13 @@ function doneBuild (doneCallback, err, source) {
 	}
 
 	if (source) {
-		return cachepurge.deleteSource(null, source, donePurge.bind(null, doneCallback));
+		return cache.deleteSource(null, source, stage, donePurge.bind(null, done));
 	}
 
 	log.info('jms-deploy', 'done');
-	if (doneCallback) {
-		doneCallback(0)
+
+	if (done) {
+		done(0)
 	} else {
 		process.exit(0);
 	}
@@ -50,11 +52,12 @@ function doneBuild (doneCallback, err, source) {
 
 /**
  *
- * @param err
+ * @param {Function} done
+ * @param {Object} err
  */
-function donePurge (doneCallback, err) {
+function donePurge (done, err) {
 
-	var log = require(paths.libdir + '/debug/log');
+
 
 	if (err) {
 		log.warn('jms-deploy', 'cache was not purged successfully');
@@ -64,8 +67,8 @@ function donePurge (doneCallback, err) {
 
 	log.info('jms-deploy', 'done');
 
-	if (doneCallback) {
-		doneCallback(0)
+	if (done) {
+		done(0)
 	} else {
 		process.exit(0);
 	}
@@ -73,35 +76,20 @@ function donePurge (doneCallback, err) {
 
 /**
  *
+ * @param {String} sourceId
+ * @param {Function} done
  */
-function deploy_runner (sourceId, doneCallback) {
-	var log = require(paths.libdir + '/debug/log');
+function deploy_runner (sourceId, stage, done) {
+
 	var sources = Object.keys(codebaseConf.sources);
 
-
+	// deploy single source
 	if (sourceId && sources.indexOf(sourceId) > -1) {
-		builder(sourceId, doneBuild.bind(null, doneCallback));
-		return;
+		builder(sourceId, stage, doneBuild.bind(null, done));
+	} else {
+		throw new Error('no such source:' + sourceId)
 	}
 
-	var done = function done (err, source) {
-		if (!sources || err) {
-			sources = false;
-			return doneBuild(doneCallback, err, source);
-		}
-
-		sources.pop();
-		cachepurge.deleteSource(source, function () {});
-
-		if (sources.length === 0) {
-			doneBuild(doneCallback, null);
-		}
-	};
-
-	// build all
-	Object.keys(codebaseConf.sources).forEach(function sourceIterator (iteratedSourceId) {
-		builder(iteratedSourceId, done);
-	});
 
 }
 
