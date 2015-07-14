@@ -12,7 +12,7 @@
  *
  */
 
-var deploy = require('./deploy_runner');
+var deploy = require('../deploy-runner');
 var argv = require('minimist')(process.argv.slice(2));
 
 var sourceId, stage;

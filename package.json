@@ -1,6 +1,6 @@
 {
   "name": "jms-deploy",
-  "main": "./deploy.js",
+  "main": "./deploy-runner.js",
   "version": "0.2.0",
   "description": "JMS deployer for Ustream",
   "author": "_Nec <nec@ustream.tv>",
