@@ -1,6 +1,6 @@
 {
   "name": "jms-deploy",
-  "main": "./deploy_runner.js",
+  "main": "./deploy.js",
   "version": "0.2.0",
   "description": "JMS deployer for Ustream",
   "author": "_Nec <nec@ustream.tv>",
@@ -30,7 +30,8 @@
     "url": "git@git-repos.ustream-adm.in:jms/jms-deploy.git"
   },
   "publishConfig": {
-    "registry": "http://sjc-npm-cache.ustream.tv:4873"
+    "registry": "http://sjc-npm-cache.ustream.tv:4873",
+    "username": "ustream"
   },
   "engines": {
     "node": ">= 0.10"
