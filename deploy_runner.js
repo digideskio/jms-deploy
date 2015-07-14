@@ -6,7 +6,6 @@ var paths          = require('./lib/paths');
 var log            = require(paths.libdir + '/debug/log');
 
 var codebaseConf   = config.codebase;
-var cache          = require(paths.libdir + '/cachepurge');
 var builder        = require(paths.libdir + '/startup/builder');
 
 var startTime = +new Date();
@@ -35,34 +34,6 @@ function doneBuild (done, err, source, stage) {
 			process.exit(1);
 		}
 		return;
-	}
-
-	if (source) {
-		return cache.deleteSource(null, source, stage, donePurge.bind(null, done));
-	}
-
-	log.info('jms-deploy', 'done');
-
-	if (done) {
-		done(0)
-	} else {
-		process.exit(0);
-	}
-}
-
-/**
- *
- * @param {Function} done
- * @param {Object} err
- */
-function donePurge (done, err) {
-
-
-
-	if (err) {
-		log.warn('jms-deploy', 'cache was not purged successfully');
-	} else {
-		log.info('jms-deploy', 'cache purged');
 	}
 
 	log.info('jms-deploy', 'done');

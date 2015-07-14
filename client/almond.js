@@ -308,15 +308,18 @@ var requirejs, require, define;
 				if (cjsModule && cjsModule.exports !== undef &&
 					cjsModule.exports !== defined[name]) {
 					defined[name] = cjsModule.exports;
+
 				} else if (ret !== undef || !usingExports) {
 					//Use the return value from the function.
 					defined[name] = ret;
+
 				}
 			}
 		} else if (name) {
 			//May just be an object definition for the module. Only
 			//worry about defining if have a module name.
 			defined[name] = callback;
+
 		}
 	};
 
