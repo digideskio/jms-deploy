@@ -1,12 +1,8 @@
 #!/usr/bin/env node
 
-var config         = require('jms-config');
+
 var paths          = require('./lib/paths');
 
-var log            = require(paths.libdir + '/debug/log');
-
-var codebaseConf   = config.codebase;
-var builder        = require(paths.libdir + '/startup/builder');
 
 var startTime = +new Date();
 
@@ -19,6 +15,8 @@ var startTime = +new Date();
  * @returns {*}
  */
 function doneBuild (done, err, source, stage) {
+
+	var log = require(paths.libdir + '/debug/log');
 	var doneTime = +new Date();
 
 	var elapsed = Math.round((doneTime - startTime) / 1000);
@@ -50,13 +48,21 @@ function doneBuild (done, err, source, stage) {
  * @param {String} sourceId
  * @param {Function} done
  */
-function deploy_runner (sourceId, stage, done) {
+function deploy_runner (sourceId, stage, config, done) {
 
-	var sources = Object.keys(codebaseConf.sources);
+	if (typeof config === 'string') {
+		global.jmsConfig = require('jms-config').getConfig(config);
+	} else if (typeof config === 'object') {
+		global.jmsConfig = config;
+	} else {
+		global.jmsConfig = require('jms-config');
+	}
+
+	var sources = Object.keys( global.jmsConfig.codebase.sources);
 
 	// deploy single source
 	if (sourceId && sources.indexOf(sourceId) > -1) {
-		builder(sourceId, stage, doneBuild.bind(null, done));
+		require(paths.libdir + '/startup/builder')(sourceId, stage, doneBuild.bind(null, done));
 	} else {
 		throw new Error('no such source:' + sourceId)
 	}

@@ -25,4 +25,4 @@ if (argv['_'] && argv['_'][0] && argv['_'][1]) {
 	process.exit(1)
 }
 
-deploy(sourceId, stage);
+deploy(sourceId, stage, argv.config);

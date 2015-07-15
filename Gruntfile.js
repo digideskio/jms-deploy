@@ -16,7 +16,7 @@ module.exports = function(grunt) {
 				pushTags: true, //default: true
 
 				npm: true, //default: true
-				npmtag: true, //default: no tag
+				npmtag: false, //default: no tag
 			}
 		}
 	});
