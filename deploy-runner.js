@@ -46,6 +46,8 @@ function doneBuild (done, err, source, stage) {
 /**
  *
  * @param {String} sourceId
+ * @param {String} stage
+ * @param {String|Object} config
  * @param {Function} done
  */
 function deploy_runner (sourceId, stage, config, done) {
@@ -58,7 +60,7 @@ function deploy_runner (sourceId, stage, config, done) {
 		global.jmsConfig = require('jms-config');
 	}
 
-	var sources = Object.keys( global.jmsConfig.codebase.sources);
+	var sources = Object.keys(global.jmsConfig.codebase.sources);
 
 	// deploy single source
 	if (sourceId && sources.indexOf(sourceId) > -1) {
