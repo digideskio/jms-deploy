@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 
-var paths          = require('./lib/paths');
+var paths = require('./lib/paths');
 
 
 var startTime = +new Date();
@@ -64,7 +64,7 @@ function deploy_runner (sourceId, stage, config, done) {
 
 	// deploy single source
 	if (sourceId && sources.indexOf(sourceId) > -1) {
-		require(paths.libdir + '/startup/builder')(sourceId, stage, doneBuild.bind(null, done));
+		require(paths.libdir + '/builder')(sourceId, stage, doneBuild.bind(null, done));
 	} else {
 		throw new Error('no such source:' + sourceId)
 	}
