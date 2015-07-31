@@ -1,7 +1,7 @@
 #!/usr/bin/env node
+require('app-module-path').addPath(__dirname);
 
 
-var paths = require('./lib/paths');
 
 
 var startTime = +new Date();
