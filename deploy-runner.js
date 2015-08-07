@@ -16,7 +16,7 @@ var startTime = +new Date();
  */
 function doneBuild (done, err, source, stage) {
 
-	var log = require(paths.libdir + '/debug/log');
+	var log = require('lib/debug/log');
 	var doneTime = +new Date();
 
 	var elapsed = Math.round((doneTime - startTime) / 1000);
@@ -64,7 +64,7 @@ function deploy_runner (sourceId, stage, config, done) {
 
 	// deploy single source
 	if (sourceId && sources.indexOf(sourceId) > -1) {
-		require(paths.libdir + '/builder')(sourceId, stage, doneBuild.bind(null, done));
+		require('lib/builder')(sourceId, stage, doneBuild.bind(null, done));
 	} else {
 		throw new Error('no such source:' + sourceId)
 	}

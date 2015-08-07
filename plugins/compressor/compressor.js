@@ -4,7 +4,7 @@ var util      = require('util');
 var uglify    = require('uglify-js');
 
 var paths     = require('../../lib/paths');
-var log       = require(paths.libdir + '/debug/log');
+var log       = require('lib/debug/log');
 
 
 var EventEmitter = require('events').EventEmitter;
