@@ -9,9 +9,11 @@ var log       = require('lib/debug/log');
 
 var EventEmitter = require('events').EventEmitter;
 
-function ModuleCompressor (streamConf, pluginConf) {
+function ModuleCompressor (streamConf, pluginConf, sourceId, config) {
 	Transform.call(this, streamConf);
 	this.pluginConf = pluginConf;
+	this.config = config;
+	this.sourceId = sourceId;
 }
 
 util.inherits(ModuleCompressor, Transform);
@@ -19,17 +21,29 @@ util.inherits(ModuleCompressor, Transform);
 ModuleCompressor.prototype._transform = function (chunk, encoding, done) {
 
 	var err = false;
+	var path = this.config.codebase.sources[this.sourceId].root;
 	var data = JSON.parse(chunk.toString());
 	var uglifyObject;
 
 	log.verbose('compressing ', data.module);
 
+	data.lines = data.source.split('\n').length;
+
 	try {
 		uglifyObject = uglify.minify(data.source, {
 			fromString: true,
-			mangle: true
+			mangle: true,
+			compress: true,
+			outSourceMap: data.module + '.js.map'
 		});
 		data.source = uglifyObject.code;
+
+		var map = JSON.parse(uglifyObject.map);
+
+		map.sources = [
+			data.path.replace(path + '/', '')
+		];
+		data.sourceMap = JSON.stringify(map);
 	} catch (e) {
 
 		//TODO
