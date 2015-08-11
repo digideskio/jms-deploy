@@ -6,7 +6,6 @@
   "author": "_Nec <nec@ustream.tv>",
   "license": "MIT",
   "dependencies": {
-    "app-module-path": "^1.0.3",
     "async": "latest",
     "escodegen": "latest",
     "esprima": "latest",
@@ -36,5 +35,9 @@
   },
   "engines": {
     "node": ">= 0.10"
+  },
+  "scripts": {
+    "postinstall" : "node -e \"var p='../plugins',l='../lib',dl='node_modules/lib',dp='node_modules/plugins',fs=require('fs');fs.exists(l,function(e){e||fs.symlinkSync(l,dl,'dir')});fs.exists(p,function(e){e||fs.symlinkSync(p,dp,'dir')});\""
   }
 }
+

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-require('app-module-path').addPath(__dirname);
+//require('app-module-path').addPath(__dirname);
 
 
 
