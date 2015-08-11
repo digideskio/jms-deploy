@@ -27,6 +27,7 @@ ModuleCompressor.prototype._transform = function (chunk, encoding, done) {
 
 	log.verbose('compressing ', data.module);
 
+	data.originalSource = data.source;
 	data.lines = data.source.split('\n').length;
 
 	try {
