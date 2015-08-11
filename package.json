@@ -1,7 +1,7 @@
 {
   "name": "jms-deploy",
   "main": "./deploy-runner.js",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "JMS deployer for Ustream",
   "author": "_Nec <nec@ustream.tv>",
   "license": "MIT",
@@ -37,7 +37,6 @@
     "node": ">= 0.10"
   },
   "scripts": {
-    "postinstall" : "node -e \"var p='../plugins',l='../lib',dl='node_modules/lib',dp='node_modules/plugins',fs=require('fs');fs.exists(l,function(e){e||fs.symlinkSync(l,dl,'dir')});fs.exists(p,function(e){e||fs.symlinkSync(p,dp,'dir')});\""
+    "postinstall": "node -e \"var p='../plugins',l='../lib',dl='node_modules/lib',dp='node_modules/plugins',fs=require('fs');fs.exists(l,function(e){e||fs.symlinkSync(l,dl,'dir')});fs.exists(p,function(e){e||fs.symlinkSync(p,dp,'dir')});\""
   }
 }
-
