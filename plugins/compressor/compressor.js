@@ -45,6 +45,8 @@ ModuleCompressor.prototype._transform = function (chunk, encoding, done) {
 			data.path.replace(path + '/', '')
 		];
 		data.sourceMap = JSON.stringify(map);
+
+
 	} catch (e) {
 
 		//TODO
