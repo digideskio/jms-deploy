@@ -21,7 +21,7 @@ util.inherits(ModuleCompressor, Transform);
 ModuleCompressor.prototype._transform = function (chunk, encoding, done) {
 
 	var err = false;
-	var path = this.config.codebase.sources[this.sourceId].root;
+	var path = this.config.codebase.source[this.sourceId].root;
 	var data = JSON.parse(chunk.toString());
 	var uglifyObject;
 

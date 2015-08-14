@@ -60,7 +60,7 @@ function deploy_runner (sourceId, stage, config, done) {
 		global.jmsConfig = require('jms-config');
 	}
 
-	var sources = Object.keys(global.jmsConfig.codebase.sources);
+	var sources = Object.keys(global.jmsConfig.codebase.source);
 
 	// deploy single source
 	if (sourceId && sources.indexOf(sourceId) > -1) {

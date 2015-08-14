@@ -11,7 +11,7 @@
     "esprima": "latest",
     "estraverse": "latest",
     "graceful-fs": "latest",
-    "jms-config": "~0.5.1",
+    "jms-config": "~0.7.0",
     "jms-storage": "latest",
     "jms-ustreamlocales": "0.1.11",
     "lodash": "latest",
