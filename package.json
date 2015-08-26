@@ -1,7 +1,7 @@
 {
   "name": "jms-deploy",
   "main": "./deploy-runner.js",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "JMS deployer for Ustream",
   "author": "_Nec <nec@ustream.tv>",
   "license": "MIT",
