@@ -1,6 +1,6 @@
 var path=require('path');
 
-var k = path.normalize(__dirname + '/../..')
+var k = path.normalize(__dirname + '/../..');
 
 if ('node_modules' !== k.split(path.sep).pop()) return;
 
