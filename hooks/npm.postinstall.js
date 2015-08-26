@@ -1,8 +1,16 @@
 
-
+var path=require('path');
 console.log('o hai!!')
 
 console.log(__dirname);
+
+
+
+var k = path.normalize(__dirname + '/../..')
+
+
+
+console.log('node_modules' === k.split(path.sep).pop());
 
 return;
 
