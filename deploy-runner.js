@@ -1,11 +1,6 @@
 #!/usr/bin/env node
-//require('app-module-path').addPath(__dirname);
-
-
-
 
 var startTime = +new Date();
-
 
 /**
  *
