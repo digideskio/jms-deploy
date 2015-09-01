@@ -47,12 +47,32 @@ function doneBuild (done, err, source, stage) {
  */
 function deploy_runner (sourceId, stage, config, done) {
 
+	if (typeof sourceId == 'object') {
+		config = arguments[0];
+		sourceId = null;
+	}
+
+	if (typeof stage == 'function') {
+		done = arguments[1];
+		stage = null;
+	}
+
 	if (typeof config === 'string') {
 		global.jmsConfig = require('jms-config').getConfig(config);
 	} else if (typeof config === 'object') {
 		global.jmsConfig = config;
 	} else {
 		global.jmsConfig = require('jms-config');
+	}
+
+	// default sourceid let be the first entry
+	if (!sourceId) {
+		sourceId = Object.keys(global.jmsConfig.codebase.source)[0];
+	}
+
+	// default stage let be master
+	if (!stage) {
+		stage = 'master';
 	}
 
 	var sources = Object.keys(global.jmsConfig.codebase.source);
