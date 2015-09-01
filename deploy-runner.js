@@ -16,7 +16,7 @@ function doneBuild (done, err, source, stage) {
 
 	var elapsed = Math.round((doneTime - startTime) / 1000);
 
-	process.stdout.write(['deploy time (sec): ', elapsed ].join('') + '\n');
+	log.info('jms-deploy', ['time elapsed (sec): ', elapsed ].join(''));
 
 	if (err) {
 		log.error('jms-deploy', err);
