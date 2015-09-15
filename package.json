@@ -1,7 +1,6 @@
 {
   "name": "jms-deploy",
   "main": "./deploy-runner.js",
-  "version": "2.0.7",
   "description": "Deploy to JMS server",
   "author": "_Nec <nec@ustream.tv>",
   "license": "MIT",
@@ -11,7 +10,6 @@
     "esprima": "latest",
     "estraverse": "latest",
     "graceful-fs": "latest",
-    "jms-config": "~1.1.0",
     "jms-storage": "latest",
     "lodash": "latest",
     "minimist": "latest",
@@ -21,18 +19,19 @@
     "uglify-js": "latest"
   },
   "devDependencies": {
+    "grunt": "latest",
     "grunt-release": "latest",
-    "grunt": "latest"
+    "semantic-release": "^4.3.4"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ustream/jms-deploy.git"
   },
-
   "engines": {
     "node": ">= 0.10"
   },
   "scripts": {
-    "postinstall": "node hooks/npm.postinstall.js"
+    "postinstall": "node hooks/npm.postinstall.js",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   }
 }
