@@ -2,7 +2,7 @@
   "name": "jms-deploy",
   "main": "./deploy-runner.js",
   "version": "2.0.7",
-  "description": "JMS deployer for Ustream",
+  "description": "Deploy to JMS server",
   "author": "_Nec <nec@ustream.tv>",
   "license": "MIT",
   "dependencies": {
@@ -26,12 +26,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@git-repos.ustream-adm.in:jms/jms-deploy.git"
+    "url": "https://github.com/ustream/jms-deploy.git"
   },
-  "publishConfig": {
-    "registry": "http://sjc-npm-cache.ustream.tv:4873",
-    "username": "ustream"
-  },
+
   "engines": {
     "node": ">= 0.10"
   },
