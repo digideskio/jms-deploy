@@ -5,6 +5,7 @@
   "author": "_Nec <nec@ustream.tv>",
   "license": "MIT",
   "dependencies": {
+    "app-module-path": "^1.0.3",
     "async": "latest",
     "escodegen": "latest",
     "esprima": "latest",
@@ -19,8 +20,11 @@
     "uglify-js": "latest"
   },
   "devDependencies": {
-    "grunt": "latest",
-    "grunt-release": "latest",
+    "mocha": "latest",
+    "chai": "latest",
+    "sinon": "latest",
+    "redis": "^1.0.0",
+    "pre-commit": "latest",
     "semantic-release": "^4.3.4"
   },
   "repository": {
@@ -32,6 +36,12 @@
   },
   "scripts": {
     "postinstall": "node hooks/npm.postinstall.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
-  }
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "mocha --ui tdd --config test tests/unit/*.js",
+    "test:integration": ". tests/scripts/run.sh"
+  },
+  "pre-commit": [
+    "test"
+  ]
 }

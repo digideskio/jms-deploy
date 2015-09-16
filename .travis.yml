@@ -13,3 +13,5 @@ before_script:
   - npm prune
 after_success:
   - npm run semantic-release
+services:
+  - redis-server

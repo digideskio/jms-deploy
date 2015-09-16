@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+require('app-module-path').addPath(__dirname.replace('/lib', ''));
 
 var startTime = +new Date();
 
