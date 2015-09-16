@@ -57,13 +57,7 @@ function deploy_runner (sourceId, stage, config, done) {
 		stage = null;
 	}
 
-	if (typeof config === 'string') {
-		global.jmsConfig = require('jms-config').getConfig(config);
-	} else if (typeof config === 'object') {
-		global.jmsConfig = config;
-	} else {
-		global.jmsConfig = require('jms-config');
-	}
+	global.jmsConfig = config;
 
 	// default sourceid let be the first entry
 	if (!sourceId) {
